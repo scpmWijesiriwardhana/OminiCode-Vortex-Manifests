@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marketplace-service
+  namespace: vortex
+  labels:
+    app: marketplace-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: marketplace-service
+  template:
+    metadata:
+      labels:
+        app: marketplace-service
+    spec:
+      containers:
+      - name: marketplace-service
+        image: chamathrko/vortex:marketplace-service
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8200
+        env:
+        - name: AUTH_SERVICE_URL
+          value: "http://auth-service.vortex:8100"
+        - name: CONFIG_SERVER_URL
+          value: "http://config-server.vortex:9999"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      imagePullSecrets:
+      - name: vortex-docker-registry
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: marketplace-service
+  namespace: vortex
+spec:
+  selector:
+    app: marketplace-service
+  ports:
+  - protocol: TCP
+    port: 8200
+    targetPort: 8200
+  type: ClusterIP
