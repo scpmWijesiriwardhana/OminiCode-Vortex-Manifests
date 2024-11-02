@@ -9,7 +9,7 @@ spec:
   source: 
     repoURL: https://github.com/scpmWijesiriwardhana/OminiCode-Vortex-Manifests.git
     targetRevision: DevOps
-    #path: 
+    path: . 
   destination:
     server: https://kubernetes.default.svc
     namespace: vortex
