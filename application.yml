@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: vortex-argo-application
+  namespace: argocd
+spec:
+  project: default
+
+  source: 
+    repoURL: https://github.com/scpmWijesiriwardhana/OminiCode-Vortex-Manifests.git
+    targetRevison: DevOps
+    #path: 
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vortex
+
+  syncPolicy: 
+    syncOptions: 
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
+
+
+
