@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: marketplace-service
-        image: chamathrko/vortex:marketplace-service
+        image: chamathrko/marketplace-service:1.0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 8200

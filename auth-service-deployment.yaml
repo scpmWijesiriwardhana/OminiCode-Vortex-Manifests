@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: auth-service
-        image: chamathrko/vortex:auth-service
+        image: chamathrko/auth-service:1.0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 8100
