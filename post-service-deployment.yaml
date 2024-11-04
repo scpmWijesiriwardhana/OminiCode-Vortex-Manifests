@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: post-service
-        image: chamathrko/vortex:post-service
+        image: chamathrko/post-service:1.0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 8300
