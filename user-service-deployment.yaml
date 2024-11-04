@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: chamathrko/vortex:user-service
+        image: chamathrko/user-service:1.0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 8200
