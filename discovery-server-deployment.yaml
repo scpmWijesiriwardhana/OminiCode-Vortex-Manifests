@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery-server
+  namespace: vortex
+  labels:
+    app: discovery-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discovery-server
+  template:
+    metadata:
+      labels:
+        app: discovery-server
+    spec:
+      containers:
+      - name: discovery-server
+        image: chamathrko/auth-service:1.0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8761
+        env:
+        - name: EUREKA_SERVER_URL
+          value: "http://discovery-server.vortex:8761/eureka/"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      imagePullSecrets:
+      - name: vortex-docker-registry
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: discovery-server
+  namespace: vortex
+spec:
+  selector:
+    app: discovery-server
+  ports:
+  - protocol: TCP
+    port: 8761
+    targetPort: 8761
+  type: ClusterIP

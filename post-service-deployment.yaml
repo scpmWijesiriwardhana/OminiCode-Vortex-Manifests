@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-service
+  namespace: vortex
+  labels:
+    app: post-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post-service
+  template:
+    metadata:
+      labels:
+        app: post-service
+    spec:
+      containers:
+      - name: post-service
+        image: chamathrko/vortex:post-service
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8300
+        env:
+        - name: USER_SERVICE_URL
+          value: "http://user-service.vortex:8200"
+        - name: AUTH_SERVICE_URL
+          value: "http://auth-service.vortex:8100"
+        - name: CONFIG_SERVER_URL
+          value: "http://config-server.vortex:9999"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      imagePullSecrets:
+      - name: vortex-docker-registry
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-service
+  namespace: vortex
+spec:
+  selector:
+    app: post-service
+  ports:
+  - protocol: TCP
+    port: 8300
+    targetPort: 8300
+  type: ClusterIP
