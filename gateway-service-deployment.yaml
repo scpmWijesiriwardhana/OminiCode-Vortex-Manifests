@@ -22,6 +22,8 @@ spec:
         ports:
         - containerPort: 8765
         env:
+        - name: EUREKA_SERVER_URL
+          value: "http://eureka-server.vortex:8761/eureka/"
         - name: USER_SERVICE_URL
           value: "http://user-service.vortex:8200"
         - name: AUTH_SERVICE_URL
@@ -30,8 +32,8 @@ spec:
           value: "http://post-service.vortex:8300"
         - name: NOTIFICATION_SERVICE_URL
           value: "http://notification-service.vortex:8400"
-        - name: CONFIG_SERVER_URL
-          value: "http://config-server.vortex:9999"
+        - name: MARKETPLACE_SERVICE_URL
+          value: "http://marketplace-service.vortex:8500"
         resources:
           requests:
             memory: "256Mi"
