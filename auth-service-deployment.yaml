@@ -22,8 +22,8 @@ spec:
         ports:
         - containerPort: 8100
         env:
-        - name: CONFIG_SERVER_URL
-          value: "http://config-server.vortex:9999"
+        - name: EUREKA_SERVER_URL
+          value: "http://eureka-server.vortex:9999"
         - name: POST_SERVICE_URL
           value: "http://post-service.vortex:8300"
         - name: USER_SERVICE_URL
