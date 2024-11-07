@@ -26,8 +26,10 @@ spec:
           value: "http://user-service.vortex:8200"
         - name: AUTH_SERVICE_URL
           value: "http://auth-service.vortex:8100"
-        - name: CONFIG_SERVER_URL
-          value: "http://config-server.vortex:9999"
+        - name: EUREKA_SERVER_URL
+          value: "http://eureka-server.vortex:8761/eureka"
+        - name: KAFKA_SERVER_URL
+          value: "http://kafka-server.vortex:9092"
         resources:
           requests:
             memory: "256Mi"
