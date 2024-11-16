@@ -56,6 +56,6 @@ spec:
   - protocol: TCP
     port: 8765
     targetPort: 8765
-  type: ClusterIP
+  type: LoadBalacer
 
 
